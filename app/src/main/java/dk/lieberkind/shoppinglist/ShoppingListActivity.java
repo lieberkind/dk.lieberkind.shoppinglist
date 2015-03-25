@@ -5,14 +5,10 @@ import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
 
 public class ShoppingListActivity extends ListActivity {
 
@@ -66,13 +62,9 @@ public class ShoppingListActivity extends ListActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_shopping_list, menu);
-        return true;
-    }
-
+    /**
+     * The onStop activity lifecycle method
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -80,30 +72,54 @@ public class ShoppingListActivity extends ListActivity {
         items.closeDatabaseConnection();
     }
 
+    /**
+     * Add an item to the list
+     *
+     * @param name The name of the item
+     * @param amount The amount of the item
+     */
     public void addItem(String name, int amount) {
         items.add(name, amount);
         refreshList();
         refreshItemSum();
     }
 
+    /**
+     * Increment the amount of an item by one
+     *
+     * @param itemId The id of the item to increment
+     */
     public void incrementAmount(int itemId) {
         items.incrementAmount(itemId);
         refreshList();
         refreshItemSum();
     }
 
+    /**
+     * Decrement the amount of an item by one
+     *
+     * @param itemId The id of the item to decrement
+     */
     public void decrementAmount(int itemId) {
         items.decrementAmount(itemId);
         refreshList();
         refreshItemSum();
     }
 
+    /**
+     * Delete an item
+     *
+     * @param itemId The id of the item to delete
+     */
     public void delete(int itemId) {
         items.delete(itemId);
         refreshList();
         refreshItemSum();
     }
 
+    /**
+     * Set the item click listener
+     */
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -115,6 +131,13 @@ public class ShoppingListActivity extends ListActivity {
         openEditItem((int) id, name, amount);
     }
 
+    /**
+     * Display the "edit item" view in the top frame
+     *
+     * @param itemId The id of the item to edit
+     * @param itemName The name of the item to edit
+     * @param itemAmount The amount of the item
+     */
     public void openEditItem(int itemId, String itemName, int itemAmount) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -124,6 +147,9 @@ public class ShoppingListActivity extends ListActivity {
         transaction.commit();
     }
 
+    /**
+     * Close the "edit item" view in the top and display the "add item" view
+     */
     public void closeEditItem() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -132,11 +158,17 @@ public class ShoppingListActivity extends ListActivity {
         transaction.commit();
     }
 
+    /**
+     * Refresh the list
+     */
     public void refreshList() {
         Cursor cursor = items.all();
         cursorAdapter.changeCursor(cursor);
     }
 
+    /**
+     * Refresh the total sum displayed in the bottom of the screen
+     */
     private void refreshItemSum() {
         itemSumTextView.setText(String.valueOf(items.sum()));
     }

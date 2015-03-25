@@ -1,7 +1,6 @@
 package dk.lieberkind.shoppinglist;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,6 +22,12 @@ public class AddItemFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * The onCreateView fragment lifecycle method
+     *
+     * Initialize the fragments view and assign all subviews to the fragment itself so we can easily
+     * access them later on.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,6 +43,9 @@ public class AddItemFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Create the necessary button listeners
+     */
     private void createButtonListeners() {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +54,9 @@ public class AddItemFragment extends Fragment {
                 String amount = itemAmountField.getText().toString();
                 String message;
 
+                // If the name or the amount fields are empty, or if the amount is set to 0, we
+                // display an error message to the user. If everything is OK, we can go ahead and
+                // add item and display a success message
                 if(name.isEmpty() || amount.isEmpty()) {
                     message = "Fill in both item and amount fields";
                 } else if (Integer.parseInt(amount) == 0) {
@@ -70,6 +81,14 @@ public class AddItemFragment extends Fragment {
         });
     }
 
+    /**
+     * The onAttach fragment lifecycle method
+     *
+     * Here we assign the hosting activity to the fragment for easy access later on.
+     *
+     * @param activity The hosting activity
+     * @throws java.lang.ClassCastException If the hosting activity is not of type ShoppingListActivity
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -80,6 +99,9 @@ public class AddItemFragment extends Fragment {
         }
     }
 
+    /**
+     * The onDetach fragment lifecycle method
+     */
     @Override
     public void onDetach() {
         super.onDetach();

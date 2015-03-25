@@ -1,7 +1,6 @@
 package dk.lieberkind.shoppinglist;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,10 +27,9 @@ public class EditItemFragment extends Fragment {
     private Button doneButton;
 
     /**
-     * Use this factory method to add a new instance of
-     * this fragment using the provided parameters.
+     * Static "constructor" for easy fragment creation
      *
-     * @return A new instance of fragment EditItemFragment.
+     * @return A new instance of EditItemFragment
      */
     public static EditItemFragment newInstance(int itemId, String itemName, int itemAmount) {
         EditItemFragment fragment = new EditItemFragment();
@@ -47,6 +45,9 @@ public class EditItemFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * The onCreate fragment lifecycle method
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +58,20 @@ public class EditItemFragment extends Fragment {
         }
     }
 
+    /**
+     * The onCreateView fragment lifecycle method
+     *
+     * Initialize the fragments view and assign all subviews to the fragment itself so we can easily
+     * access them later on.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("onCreateView...");
 
-        // Inflate the layout for this fragment
+        // Inflate the layout for the fragment
         View view = inflater.inflate(R.layout.fragment_edit_item, container, false);
 
+        // Assign the views
         itemNameTextView = (TextView) view.findViewById(R.id.edit_item_name);
         incrementButton = (Button) view.findViewById(R.id.increment_amount_button);
         decrementButton = (Button) view.findViewById(R.id.decrement_amount_button);
@@ -74,12 +81,15 @@ public class EditItemFragment extends Fragment {
             itemNameTextView.setText(itemName);
         }
 
-        createButtonListeners(view);
+        createButtonListeners();
 
         return view;
     }
 
-    private void createButtonListeners(View view) {
+    /**
+     * Create necessary button listeners
+     */
+    private void createButtonListeners() {
 
         incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +118,14 @@ public class EditItemFragment extends Fragment {
         });
     }
 
+    /**
+     * The onAttach fragment lifecycle method
+     *
+     * Here we assign the hosting activity to the fragment for easy access later on.
+     *
+     * @param activity The hosting activity
+     * @throws java.lang.ClassCastException If the hosting activity is not of type ShoppingListActivity
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -118,6 +136,9 @@ public class EditItemFragment extends Fragment {
         }
     }
 
+    /**
+     * The onDetach fragment lifecycle method
+     */
     @Override
     public void onDetach() {
         super.onDetach();
