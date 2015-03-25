@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ShoppingList</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_item_button">Add</string>
+    <string name="item_name_hint">Item</string>
+    <string name="item_amount_hint">Amount</string>
+    <string name="increment_amount_button_text">+</string>
+    <string name="edit_done_button_text">Done</string>
+    <string name="decrement_amount_button_text">-</string>
+    <string name="total_items_label">Total items:</string>
+
+</resources>

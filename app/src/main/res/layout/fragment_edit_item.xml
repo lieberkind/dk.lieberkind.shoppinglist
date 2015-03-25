@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dk.lieberkind.shoppinglist.EditItemFragment">
+
+    <Button android:id="@+id/edit_done_button"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:text="@string/edit_done_button_text" />
+
+    <Button android:id="@+id/increment_amount_button"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/edit_done_button"
+        android:layout_alignBottom="@+id/edit_done_button"
+        android:text="@string/increment_amount_button_text" />
+
+    <Button android:id="@+id/decrement_amount_button"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/increment_amount_button"
+        android:layout_alignBottom="@id/increment_amount_button"
+        android:text="@string/decrement_amount_button_text"
+        />
+
+    <TextView android:id="@+id/edit_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/decrement_amount_button"
+        android:layout_alignTop="@id/decrement_amount_button"
+        android:layout_alignBottom="@id/decrement_amount_button"
+        android:gravity="center_vertical"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
